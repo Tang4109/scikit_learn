@@ -1,8 +1,8 @@
 '''
 !/usr/bin/env python
  _*_coding:utf-8 _*_
-@Time    :2019/8/19 9:29
-@Author  :Zhangyunjia
+@Time    :2019/8/19 9:29
+@Author  :Zhangyunjia
 @FileName: 3.3.3_wrong_scaler.py
 @Software: PyCharm
 '''
