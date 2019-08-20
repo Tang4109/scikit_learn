@@ -28,6 +28,7 @@ import matplotlib.pyplot as plt
 import mglearn
 
 X, y = make_moons(n_samples=200, noise=0.05, random_state=0)
+#使用比数据维度更多的簇来对数据进行编码
 kmeans = KMeans(n_clusters=10, random_state=0)
 kmeans.fit(X)
 y_pred = kmeans.predict(X)
