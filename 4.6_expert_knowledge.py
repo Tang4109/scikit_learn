@@ -72,22 +72,20 @@ X_hour_week_onehot = enc.fit_transform(X_hour_week).toarray()
 
 poly_transformer = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
 X_hour_week_onehot_poly = poly_transformer.fit_transform(X_hour_week_onehot)
-lr=Ridge()
+lr = Ridge()
 eval_on_features(X_hour_week_onehot_poly, y, lr)
 
 hour = ['%02d:00' % i for i in range(0, 24, 3)]  # 02d表示占两个位置，空的地方0填充
-day=['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-features=day+hour
+day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+features = day + hour
 
+features_poly = poly_transformer.get_feature_names(features)
+features_nonzero = np.array(features_poly)[lr.coef_ != 0]
+coef_nonzero = lr.coef_[lr.coef_ != 0]
 
-features_poly=poly_transformer.get_feature_names(features)
-features_nonzero=np.array(features_poly)[lr.coef_!=0]
-coef_nonzero=lr.coef_[lr.coef_!=0]
-
-plt.figure(figsize=(15,2))
-plt.plot(coef_nonzero,'o')
-plt.xticks(np.arange(len(coef_nonzero)),features_nonzero,rotation=90)
+plt.figure(figsize=(15, 2))
+plt.plot(coef_nonzero, 'o')
+plt.xticks(np.arange(len(coef_nonzero)), features_nonzero, rotation=90)
 plt.xlabel('Feature name')
 plt.ylabel('Feature magnitude')
 plt.show()
-
