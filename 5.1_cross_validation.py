@@ -11,9 +11,9 @@ import warnings
 warnings.filterwarnings('ignore')
 import numpy as np
 import pandas as pd
-from sklearn.datasets import load_breast_cancer, load_iris
-from sklearn.model_selection import train_test_split, cross_val_score, KFold, LeaveOneOut, ShuffleSplit, \
-    StratifiedShuffleSplit
+from sklearn.datasets import load_breast_cancer, load_iris, make_blobs
+from sklearn.model_selection import train_test_split, cross_val_score, KFold, LeaveOneOut, \
+    ShuffleSplit, StratifiedShuffleSplit, GroupKFold
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder, PolynomialFeatures
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge
@@ -51,3 +51,8 @@ scores = cross_val_score(logreg, iris.data, iris.target, cv=shuffle_split)
 print('分层打乱划分交叉验证得分：', scores)
 
 # 分组交叉验证
+X, y = make_blobs(n_samples=12, random_state=0)
+groups = [0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 3]
+scores = cross_val_score(logreg, X, y, groups, cv=GroupKFold(n_splits=3))
+print('分组交叉验证得分：',scores)
+
